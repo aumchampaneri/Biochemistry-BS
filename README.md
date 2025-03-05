@@ -1,1 +1,1 @@
-# Biochemistry-BS-Thesis
+# Biochemistry-BS
