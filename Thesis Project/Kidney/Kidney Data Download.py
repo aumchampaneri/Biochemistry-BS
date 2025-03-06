@@ -10,5 +10,5 @@ The data will be downloaded as a .h5ad file
 
 cellxgene_census.download_source_h5ad(
     "f95d8919-1f2a-405f-8776-bfecc0ab0f3f",
-    to_path="KidneyData.h5ad",
+    to_path="/Volumes/CHAMPANERI/Databases/KidneyData.h5ad",
 )
