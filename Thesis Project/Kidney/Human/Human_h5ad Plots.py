@@ -77,9 +77,11 @@ Heatmaps:
     - Tissue
 
 '''
+
 # Define the dendrogram location in anndata
+sc.tl.pca(kidney)
+sc.pl.pca_variance_ratio(kidney, n_pcs=50, log=True)
 sc.tl.dendrogram(kidney, groupby='cell_type')
-# sc.pl.dendrogram(kidney, groupby='cell_type')
 
 # Plot the dotplots for all_genes
 sc.pl.dotplot(
@@ -91,7 +93,7 @@ sc.pl.dotplot(
     mean_only_expressed=True,
     log=True,
     colorbar_title='mean expression in group (log scale)',
-    save='human-h5ad_all-gene_cell-type_dp.png'
+    save='human-h5ad_all-gene_cell-type_dp.pdf'
 )
 
 sc.pl.dotplot(
@@ -103,18 +105,79 @@ sc.pl.dotplot(
     mean_only_expressed=True,
     log=True,
     colorbar_title='mean expression in group (log scale)',
-    save='human-h5ad_all-gene_tissue_dp.png'
+    save='human-h5ad_all-gene_tissue_dp.pdf'
 )
 
 # Plot the dotplots for subset_genes
-sc.pl.dotplot(kidney, subset_genes, groupby='cell_type')
-sc.pl.dotplot(kidney, subset_genes, groupby='tissue')
+sc.pl.dotplot(
+    kidney,
+    subset_genes,
+    groupby='cell_type',
+    title='Kidney Cell Type Complement Gene Expression',
+    dendrogram=True,
+    mean_only_expressed=True,
+    log=True,
+    colorbar_title='mean expression in group (log scale)',
+    save='human-h5ad_subset-genes_cell-type_dp.pdf'
+)
+
+sc.pl.dotplot(
+    kidney,
+    subset_genes,
+    groupby='tissue',
+    title='Kidney Tissue Complement Gene Expression',
+    dendrogram=True,
+    mean_only_expressed=True,
+    log=True,
+    colorbar_title='mean expression in group (log scale)',
+    save='human-h5ad_subset-genes_tissue_dp.pdf'
+)
 
 
-# # Plot the heatmap for all_genes
-# sc.pl.heatmap(kidney, all_genes, groupby='cell_type', swap_axes=False, log=True, figsize=(12,16), dendrogram=True)
-# sc.pl.heatmap(kidney, all_genes, groupby='tissue', swap_axes=False, log=True, figsize=(12,16), dendrogram=True)
-#
-# # Plot the heatmap for subset_genes
-# sc.pl.heatmap(kidney, subset_genes, groupby='cell_type', swap_axes=False, log=True, figsize=(4,16), dendrogram=True)
-# sc.pl.heatmap(kidney, subset_genes, groupby='tissue', swap_axes=False, log=True, figsize=(4,16), dendrogram=True)
+# Plot the heatmap for all_genes
+sc.pl.heatmap(
+    kidney,
+    all_genes,
+    groupby='cell_type',
+    swap_axes=False,
+    log=False,
+    use_raw=False,
+    figsize=(12,20),
+    dendrogram=True,
+    save='human-h5ad_all-genes_cell-type_hm.pdf'
+)
+sc.pl.heatmap(
+    kidney,
+    all_genes,
+    groupby='tissue',
+    swap_axes=False,
+    log=False,
+    use_raw=False,
+    figsize=(12,20),
+    dendrogram=True,
+save='human-h5ad_all-genes_tissue_hm.pdf'
+)
+
+# Plot the heatmap for subset_genes
+sc.pl.heatmap(
+    kidney,
+    subset_genes,
+    groupby='cell_type',
+    swap_axes=False,
+    log=False,
+    figsize=(3,22),
+    dendrogram=True,
+    use_raw=False,
+    save='human-h5ad_subset-genes_cell-type_hm.pdf'
+)
+sc.pl.heatmap(
+    kidney,
+    subset_genes,
+    groupby='tissue',
+    swap_axes=False,
+    log=False,
+    figsize=(3,6),
+    dendrogram=True,
+    use_raw=False,
+    save='human-h5ad_subset-genes_tissue_hm.pdf'
+)
