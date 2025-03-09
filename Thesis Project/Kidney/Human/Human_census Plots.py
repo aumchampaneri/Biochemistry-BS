@@ -194,6 +194,16 @@ plt.xticks(rotation=90)
 plt.tight_layout()
 plt.savefig('Human_census_all-genes_cell-type_hm.pdf')
 
+# Create a cluster with transposed data -- ALL GENES
+plt.figure(figsize=(30, 30))
+sns.clustermap(mean_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(1.04, 0.5, 0.02, 0.45))
+plt.title('Gene Expression Heatmap for Top 50 Cell Types')
+plt.xlabel('Cell Types')
+plt.ylabel('Genes')
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.savefig('Human_census_all-genes_cell-type_cm.pdf')
+
 # Filter the mean expression data to only include the subset of genes
 mean_expression = mean_expression[subset_genes.values()]
 
@@ -207,3 +217,104 @@ plt.xticks(rotation=90)
 plt.tight_layout()
 plt.savefig('Human_census_subset-genes_cell-type_hm.pdf')
 
+# Create a clustermap with transposed data -- SUBSET GENES
+plt.figure(figsize=(30, 30))
+sns.clustermap(mean_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(1.07, 0.5, 0.02, 0.45))
+plt.title('Gene Expression Heatmap for Top 50 Cell Types')
+plt.xlabel('Cell Types')
+plt.ylabel('Genes')
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.savefig('Human_census_subset-genes_cell-type_cm.pdf')
+
+"""
+Calculate mean expression of our genes per tissue and generate heatmaps and clustermaps.
+
+Steps:
+1. Identify valid genes present in the dataset.
+2. Initialize a DataFrame to store mean expression values for each tissue type.
+3. For each tissue type:
+   a. Extract cells belonging to the tissue type.
+   b. Calculate mean expression of each gene across these cells.
+   c. Handle sparse matrices if needed.
+   d. Store the mean expression values in the DataFrame.
+4. Convert all values to numeric and fill NAs with zeros.
+5. Rename columns from Ensembl IDs to gene names using the `all_genes` dictionary.
+6. Filter the tissues to remove the kidney data.
+7. Generate and save heatmaps and clustermaps for all genes and the subset of genes.
+"""
+
+# Calculate mean expression of our genes per tissue
+valid_genes = [gene for gene in all_genes.keys() if gene in adata.var_names]
+print(f"Found {len(valid_genes)} out of {len(all_genes)} genes in the dataset")
+
+# Initialize DataFrame with proper structure
+tissue_types = adata.obs['tissue'].unique()
+tissue_expression = pd.DataFrame(index=tissue_types, columns=valid_genes)
+
+for tissue_type in tissue_types:
+    # Get indices for this tissue
+    cells_idx = adata.obs['tissue'] == tissue_type
+    # Calculate mean expression across these cells for each gene
+    subset = adata[cells_idx, valid_genes]
+
+    # Handle sparse matrices if needed
+    import scipy.sparse
+    if scipy.sparse.issparse(subset.X):
+        mean_expr = subset.X.mean(axis=0).A1  # Convert to 1D array
+    else:
+        mean_expr = np.array(subset.X.mean(axis=0))
+
+    # Fill in the values explicitly
+    for i, gene in enumerate(valid_genes):
+        tissue_expression.loc[tissue_type, gene] = float(mean_expr[i])
+
+# Convert all values to numeric and fill NAs
+tissue_expression = tissue_expression.apply(pd.to_numeric, errors='coerce')
+tissue_expression = tissue_expression.fillna(0)
+
+# Rename columns from Ensembl IDs to gene names
+tissue_expression.columns = [all_genes.get(col, col) for col in tissue_expression.columns]
+
+
+# Filter the tissues to remove the kidney data
+tissue_expression = tissue_expression.drop('kidney')
+
+# Create a heatmap
+plt.figure(figsize=(5, 10))
+sns.heatmap(tissue_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True)
+plt.title('Gene Expression Across Tissues')
+plt.ylabel('Genes')
+plt.xlabel('Tissues')
+plt.tight_layout()
+plt.savefig('Human_census_all-genes_tissue_hm.pdf')
+
+# Create a clustermap
+plt.figure(figsize=(10, 10))
+sns.clustermap(tissue_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(1.07, 0.5, 0.02, 0.45))
+plt.title('Gene Expression Across Tissues')
+plt.ylabel('Genes')
+plt.xlabel('Tissues')
+plt.tight_layout()
+plt.savefig('Human_census_all-genes_tissue_cm.pdf')
+
+# Filter the mean expression data to only include the subset of genes
+tissue_expression = tissue_expression[subset_genes.values()]
+
+# Create a heatmap
+plt.figure(figsize=(5, 5))
+sns.heatmap(tissue_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True)
+plt.title('Gene Expression Across Tissues')
+plt.ylabel('Genes')
+plt.xlabel('Tissues')
+plt.tight_layout()
+plt.savefig('Human_census_subset-genes_tissue_hm.pdf')
+
+# Create a clustermap
+plt.figure(figsize=(10, 10))
+sns.clustermap(tissue_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(1.07, 0.5, 0.02, 0.45))
+plt.title('Gene Expression Across Tissues')
+plt.ylabel('Genes')
+plt.xlabel('Tissues')
+plt.tight_layout()
+plt.savefig('Human_census_subset-genes_tissue_cm.pdf')
