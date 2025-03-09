@@ -185,22 +185,17 @@ mean_expression = filtered_adata.to_df().groupby(filtered_adata.obs['cell_type']
 mean_expression.columns = [all_genes.get(col, col) for col in mean_expression.columns]
 
 # Create a heatmap with transposed data -- ALL GENES
-plt.figure(figsize=(16, 10))
-sns.heatmap(mean_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True)
+plt.figure(figsize=(16, 16))
+sns.heatmap(mean_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_kws={"shrink":0.45})
 plt.title('Gene Expression Heatmap for Top 50 Cell Types')
 plt.xlabel('Cell Types')
 plt.ylabel('Genes')
-plt.xticks(rotation=90)
 plt.tight_layout()
 plt.savefig('Human_census_all-genes_cell-type_hm.pdf')
 
 # Create a cluster with transposed data -- ALL GENES
-plt.figure(figsize=(30, 30))
-sns.clustermap(mean_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(1.04, 0.5, 0.02, 0.45))
-plt.title('Gene Expression Heatmap for Top 50 Cell Types')
-plt.xlabel('Cell Types')
-plt.ylabel('Genes')
-plt.xticks(rotation=90)
+plt.figure(figsize=(20, 35))
+sns.clustermap(mean_expression, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(0.01,0.8,0.0,0.3))
 plt.tight_layout()
 plt.savefig('Human_census_all-genes_cell-type_cm.pdf')
 
@@ -208,22 +203,17 @@ plt.savefig('Human_census_all-genes_cell-type_cm.pdf')
 mean_expression = mean_expression[subset_genes.values()]
 
 # Create a heatmap with transposed data -- SUBSET GENES
-plt.figure(figsize=(16, 6))
-sns.heatmap(mean_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True)
+plt.figure(figsize=(16, 16))
+sns.heatmap(mean_expression, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_kws={"shrink":0.9})
 plt.title('Gene Expression Heatmap for Top 50 Cell Types')
 plt.xlabel('Cell Types')
 plt.ylabel('Genes')
-plt.xticks(rotation=90)
 plt.tight_layout()
 plt.savefig('Human_census_subset-genes_cell-type_hm.pdf')
 
 # Create a clustermap with transposed data -- SUBSET GENES
-plt.figure(figsize=(30, 30))
-sns.clustermap(mean_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(1.07, 0.5, 0.02, 0.45))
-plt.title('Gene Expression Heatmap for Top 50 Cell Types')
-plt.xlabel('Cell Types')
-plt.ylabel('Genes')
-plt.xticks(rotation=90)
+plt.figure(figsize=(20, 35))
+sns.clustermap(mean_expression, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(0.01,0.8,0.0,0.3))
 plt.tight_layout()
 plt.savefig('Human_census_subset-genes_cell-type_cm.pdf')
 
@@ -290,11 +280,8 @@ plt.tight_layout()
 plt.savefig('Human_census_all-genes_tissue_hm.pdf')
 
 # Create a clustermap
-plt.figure(figsize=(10, 10))
-sns.clustermap(tissue_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(1.07, 0.5, 0.02, 0.45))
-plt.title('Gene Expression Across Tissues')
-plt.ylabel('Genes')
-plt.xlabel('Tissues')
+plt.figure(figsize=(20, 20))
+sns.clustermap(tissue_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True)
 plt.tight_layout()
 plt.savefig('Human_census_all-genes_tissue_cm.pdf')
 
@@ -311,10 +298,7 @@ plt.tight_layout()
 plt.savefig('Human_census_subset-genes_tissue_hm.pdf')
 
 # Create a clustermap
-plt.figure(figsize=(10, 10))
-sns.clustermap(tissue_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True, cbar_pos=(1.07, 0.5, 0.02, 0.45))
-plt.title('Gene Expression Across Tissues')
-plt.ylabel('Genes')
-plt.xlabel('Tissues')
+plt.figure(figsize=(20, 20))
+sns.clustermap(tissue_expression.T, cmap='inferno', xticklabels=True, yticklabels=True, square=True, annot=False, robust=True)
 plt.tight_layout()
 plt.savefig('Human_census_subset-genes_tissue_cm.pdf')
