@@ -32,12 +32,12 @@ Chronic Kidney Disease Data
 #     to_path="/Volumes/CHAMPANERI/Databases/Human_Nor_Kidney_CellHint_scRNA.h5ad"
 # )
 
-cellxgene_census.download_source_h5ad(
-    "dea717d4-7bc0-4e46-950f-fd7e1cc8df7d",
-    to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_scRNA.h5ad"
-)
-
 # cellxgene_census.download_source_h5ad(
-#     "a12ccb9b-4fbe-457d-8590-ac78053259ef",
-#     to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_snRNA.h5ad"
+#     "dea717d4-7bc0-4e46-950f-fd7e1cc8df7d",
+#     to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_scRNA.h5ad"
 # )
+
+cellxgene_census.download_source_h5ad(
+    "a12ccb9b-4fbe-457d-8590-ac78053259ef",
+    to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_snRNA.h5ad"
+)
