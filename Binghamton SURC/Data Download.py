@@ -5,6 +5,8 @@ Use this script to download the data from the cellxgene server
 The data will be downloaded to the data folder in the root directory of the project
 The data will be downloaded as a .h5ad file
 
+Run each of the download queries separately to download the data
+
 Human Kidney Data
 - Harmonized data from 4 datasets
 - Normal Single Cell = ~200k cells
@@ -24,7 +26,6 @@ Chronic Kidney Disease Data
 > dataset_h5ad_path (scRNA): dea717d4-7bc0-4e46-950f-fd7e1cc8df7d
 > dataset_h5ad_path (snRNA): a12ccb9b-4fbe-457d-8590-ac78053259ef
 > https://cellxgene.cziscience.com/collections/0f528c8a-a25c-4840-8fa3-d156fa11086f
-
 '''
 
 # cellxgene_census.download_source_h5ad(
@@ -37,7 +38,7 @@ Chronic Kidney Disease Data
 #     to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_scRNA.h5ad"
 # )
 
-cellxgene_census.download_source_h5ad(
-    "a12ccb9b-4fbe-457d-8590-ac78053259ef",
-    to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_snRNA.h5ad"
-)
+# cellxgene_census.download_source_h5ad(
+#     "a12ccb9b-4fbe-457d-8590-ac78053259ef",
+#     to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_snRNA.h5ad"
+# )
