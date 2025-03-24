@@ -15,11 +15,13 @@
 > 
 > dataset_h5ad_path: a12ccb9b-4fbe-457d-8590-ac78053259ef
 
-> ### Automatic cell-type harmonization and integration across Human Cell Atlas datasets
-> 
-> https://cellxgene.cziscience.com/collections/854c0855-23ad-4362-8b77-6b1639e7a9fc
-> 
-> dataset_h5ad_path: 
+> ### High Resolution Slide-seqV2 Spatial Transcriptomics Enables Discovery of Disease-Specific Cell Neighborhoods and Pathways
+>
+> https://cellxgene.cziscience.com/collections/8e880741-bf9a-4c8e-9227-934204631d2a
+>
+> High resolution spatial transcriptomics is a transformative technology that enables mapping of RNA expression directly from intact tissue sections; however, its utility for the elucidation of disease processes and therapeutically actionable pathways remain largely unexplored. Here we applied Slide-seqV2 to mouse and human kidneys, in healthy and in distinct disease paradigms. First, we established the feasibility of Slide-seqV2 in human kidney by analyzing tissue from 9 distinct donors, which revealed a cell neighborhood centered around a population of LYVE1+ macrophages. Second, in a mouse model of diabetic kidney disease, we detected changes in the cellular organization of the spatially-restricted kidney filter and blood flow regulating apparatus. Third, in a mouse model of a toxic proteinopathy, we identified previously unknown, disease-specific cell neighborhoods centered around macrophages. In a spatially-restricted subpopulation of epithelial cells, we also found perturbations in 77 genes associated with the unfolded protein response (UPR), including Tmed9. Treatment with a TMED9-targeting compound showed efficient removal of toxic mutant proteins and reversal of the UPR. Our studies illustrate and experimentally validate the utility of Slide-seqV2 for the discovery of disease-specific cell neighborhoods and actionable targets.
+>
+> dataset_h5ad_path:
  
 > ### Spatiotemporal immune zonation of the human kidney
 > 
