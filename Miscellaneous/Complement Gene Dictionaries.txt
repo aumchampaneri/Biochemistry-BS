@@ -1,0 +1,288 @@
+complement_genes = {
+    # 1. Classical Pathway Components
+    # These genes encode proteins involved in the classical pathway, which is triggered by antibody-antigen complexes.
+    "classical_pathway": {
+        "enzymatic_activation": {  # Proteins involved in forming the C3 and C5 convertases
+            'C1R': 'ENSG00000159403',  # C1R serine protease
+            'C1RL': 'ENSG00000139178',  # C1R-like protein
+            'C1S': 'ENSG00000182326',  # C1S serine protease
+            'C2_ENSG00000166278': 'ENSG00000166278'  # C2, key for classical and lectin pathway convertases
+        },
+        "recognition": {  # Proteins that recognize immune complexes and initiate activation
+            'C1QA': 'ENSG00000173372',  # C1q subunit A
+            'C1QB': 'ENSG00000173369',  # C1q subunit B
+            'C1QC': 'ENSG00000159189',  # C1q subunit C
+            'C1QBP': 'ENSG00000108561'  # C1q binding protein, modulator of the pathway
+        }
+    },
+
+    # 2. Lectin Pathway Components
+    # These genes encode proteins responsible for recognizing carbohydrate patterns on pathogens.
+    "lectin_pathway": {
+        "recognition": {  # Pattern recognition molecules (PRMs) binding to carbohydrate motifs
+            'MBL2': 'ENSG00000165471',  # Mannose-binding lectin
+            'FCN1': 'ENSG00000085265',  # Ficolin-1
+            'FCN2': 'ENSG00000160339',  # Ficolin-2
+            'FCN3': 'ENSG00000142748',  # Ficolin-3
+            'COLEC10': 'ENSG00000184374',  # Collectin-10
+            'COLEC11': 'ENSG00000118004'  # Collectin-11
+        },
+        "enzymatic_activation": {  # MASP proteases that trigger the complement cascade
+            'MASP1': 'ENSG00000127241',  # Mannose-associated serine protease 1
+            'MASP2': 'ENSG00000009724',  # Mannose-associated serine protease 2
+            'MASP3': 'XXX'  # Mannose-associated serine protease 3 (Unresolved ENSG ID)
+        }
+    },
+
+    # 3. Alternative Pathway Components
+    # This pathway is constantly activated at a low level and can amplify complement response.
+    "alternative_pathway": {
+        'C3_ENSG00000125730': 'ENSG00000125730',  # C3, central to all pathways
+        'CFB': 'ENSG00000243649',  # Complement factor B, alternative pathway convertase
+        'CFD': 'ENSG00000197766',  # Complement factor D, initiator of alternative pathway
+        'CFP': 'ENSG00000126759'  # Properdin, stabilizer of alternative pathway convertase
+    },
+
+    # 4. Terminal Pathway and Membrane Attack Complex (MAC) Components
+    # These genes encode proteins forming the Membrane Attack Complex, responsible for cell lysis.
+    "terminal_pathway_mac": {
+        'C5': 'ENSG00000106804',  # C5, precursor to MAC formation
+        'C6_ENSG00000039537': 'ENSG00000039537',  # C6, MAC component
+        'C7_ENSG00000112936': 'ENSG00000112936',  # C7, MAC component
+        'C8A': 'ENSG00000157131',  # C8 alpha subunit, MAC component
+        'C8B': 'ENSG00000021852',  # C8 beta subunit, MAC component
+        'C8G': 'ENSG00000176919',  # C8 gamma subunit, MAC component
+        'C9_ENSG00000113600': 'ENSG00000113600'  # C9, final MAC component
+    },
+
+    # 5. Complement Receptors
+    # These genes encode receptors that recognize complement components and mediate immune signaling.
+    "complement_receptors": {
+        "soluble_regulators": {  # Receptors that bind soluble complement components
+            'C3AR1': 'ENSG00000171860',  # C3a receptor
+            'C5AR1': 'ENSG00000197405',  # C5a receptor 1
+            'C5AR2': 'ENSG00000134830'  # C5a receptor 2
+        },
+        "membrane_bound_receptors": {  # Cell-surface receptors mediating immune functions
+            'CR1': 'ENSG00000203710',  # Complement receptor 1
+            'CR2': 'ENSG00000117322',  # Complement receptor 2
+            'ITGAM': 'ENSG00000169896',  # Integrin alpha-M (Mac-1, CD11b)
+            'ITGAX': 'ENSG00000140678',  # Integrin alpha-X (CD11c)
+            'ITGB2': 'ENSG00000160255'  # Integrin beta-2
+        }
+    },
+
+    # 6. Complement Regulatory Proteins
+    # These genes encode proteins that regulate complement activity and prevent overactivation.
+    "complement_regulatory_proteins": {
+        'CFH': 'ENSG00000000971',  # Complement factor H, regulator of alternative pathway
+        'CFHR1': 'ENSG00000244414',  # Complement factor H-related 1
+        'CFHR2': 'ENSG00000080910',  # Complement factor H-related 2
+        'CFHR3': 'ENSG00000116785',  # Complement factor H-related 3
+        'CFHR4': 'ENSG00000134365',  # Complement factor H-related 4
+        'CFHR5': 'ENSG00000134389',  # Complement factor H-related 5
+        'CFI': 'ENSG00000205403',  # Complement factor I, degrades C3b/C4b
+        'SERPING1': 'ENSG00000149131',  # C1 inhibitor, regulates classical/lectin pathways
+        'CLU': 'ENSG00000120885',  # Clusterin, regulates MAC formation
+        'C4BPA': 'ENSG00000123838',  # C4b-binding protein alpha
+        'C4BPB': 'ENSG00000123843',  # C4b-binding protein beta
+        'CD46': 'ENSG00000117335',  # Membrane cofactor protein (MCP)
+        'CD55': 'ENSG00000196352',  # Decay accelerating factor (DAF)
+        'CD59': 'ENSG00000085063',  # CD59, MAC inhibitory protein
+        'VSIG4': 'ENSG00000155659'  # Negative regulator of complement activation
+    },
+
+    # 7. Other Complement-Related Proteins
+    # These genes encode proteins that are associated with the complement system but are not directly part of activation or regulation.
+    "other_complement_related_proteins": {
+        'CD93': 'ENSG00000125810',  # Cell surface glycoprotein involved in phagocytosis
+        'CSMD1': 'ENSG00000183117',  # Regulator of complement activation
+        'SUSD4': 'ENSG00000143502',  # Complement-related signaling molecule
+        'VCP': 'ENSG00000165280',  # p97/VCP, involved in protein homeostasis
+        'CPB2': 'ENSG00000080618',  # Carboxypeptidase B2, inactivates C3a/C5a
+        'CPN1': 'ENSG00000120054',  # Carboxypeptidase N subunit 1, regulates anaphylatoxins
+        'CPN2': 'ENSG00000178772'  # Carboxypeptidase N subunit 2, regulator of C3a/C5a
+    }
+}
+
+pattern_recognition_genes = {
+    # 1. Classical Pathway PRMs
+    # These recognize immune complexes and apoptotic cells to initiate the classical pathway.
+    "classical_pathway_prms": {
+        'C1QA': 'ENSG00000173372',  # C1q subunit A
+        'C1QB': 'ENSG00000173369',  # C1q subunit B
+        'C1QC': 'ENSG00000159189',  # C1q subunit C
+        'C1QBP': 'ENSG00000108561'  # C1q binding protein, modulator of C1q function
+    },
+
+    # 2. Lectin Pathway PRMs
+    # These bind to carbohydrate motifs on pathogens, leading to complement activation.
+    "lectin_pathway_prms": {
+        'MBL2': 'ENSG00000165471',  # Mannose-binding lectin (MBL)
+        'FCN1': 'ENSG00000085265',  # Ficolin-1
+        'FCN2': 'ENSG00000160339',  # Ficolin-2
+        'FCN3': 'ENSG00000142748',  # Ficolin-3
+        'COLEC10': 'ENSG00000184374',  # Collectin-10 (CL-L1)
+        'COLEC11': 'ENSG00000118004'  # Collectin-11 (CL-K1)
+    },
+
+    # 3. Other Complement-Associated PRMs
+    # These molecules interact with complement-related proteins and contribute to immune recognition.
+    "other_complement_prms": {
+        'CD93': 'ENSG00000125810',  # CD93, involved in endothelial cell adhesion and complement binding
+        'SUSD4': 'ENSG00000143502',  # Sushi domain-containing protein, potential complement modulator
+        'CSMD1': 'ENSG00000183117'  # CUB and Sushi multiple domains 1, potential complement regulator
+    }
+}
+
+complement_proteases = {
+    # 1. Classical Pathway Proteases
+    # These enzymes cleave complement components to activate the classical pathway.
+    "classical_pathway_proteases": {
+        'C1R': 'ENSG00000159403',  # C1r serine protease, cleaves C1s
+        'C1S': 'ENSG00000182326'   # C1s serine protease, cleaves C4 and C2
+    },
+
+    # 2. Lectin Pathway Proteases
+    # These proteases activate the lectin pathway by cleaving complement proteins.
+    "lectin_pathway_proteases": {
+        'MASP1': 'ENSG00000127241',  # MASP-1, activates MASP-2 and cleaves C2/C4
+        'MASP2': 'ENSG00000009724',  # MASP-2, cleaves C4 and C2
+        'MASP3': 'XXX'               # MASP-3, alternative function in lectin pathway regulation
+    },
+
+    # 3. Alternative Pathway Proteases
+    # These enzymes regulate and amplify the alternative pathway.
+    "alternative_pathway_proteases": {
+        'CFB': 'ENSG00000243649',  # Complement Factor B, cleaved by CFD to form Bb (C3 convertase)
+        'CFD': 'ENSG00000197766'   # Complement Factor D, cleaves Factor B to generate Bb
+    },
+
+    # 4. Terminal Pathway Proteases
+    # These enzymes contribute to C5 cleavage and the formation of the Membrane Attack Complex (MAC).
+    "terminal_pathway_proteases": {
+        'C5': 'ENSG00000106804'   # Complement component C5, cleaved to form C5a (anaphylatoxin) and C5b (MAC initiator)
+    },
+
+    # 5. Regulatory Proteases
+    # These enzymes degrade or regulate complement proteins to control excessive activation.
+    "regulatory_proteases": {
+        'CFI': 'ENSG00000205403',  # Complement Factor I, inactivates C3b and C4b
+        'CPB2': 'ENSG00000080618',  # Carboxypeptidase B2 (TAFI), regulates complement activation
+        'CPN1': 'ENSG00000120054',  # Carboxypeptidase N subunit 1, modulates complement peptides
+        'CPN2': 'ENSG00000178772'   # Carboxypeptidase N subunit 2, stabilizes complement regulation
+    }
+}
+
+complement_component_genes = {
+    # 1. Classical Pathway Components
+    # These proteins participate in the activation of the classical pathway.
+    "classical_pathway_components": {
+        'C1QA': 'ENSG00000173372',  # C1q subunit A
+        'C1QB': 'ENSG00000173369',  # C1q subunit B
+        'C1QC': 'ENSG00000159189',  # C1q subunit C
+        'C1R': 'ENSG00000159403',   # C1r protease
+        'C1S': 'ENSG00000182326',   # C1s protease
+        'C2_ENSG00000166278': 'ENSG00000166278',  # Complement C2, forms C3 convertase
+        'C4A': 'ENSG00000244731',   # Complement C4A, key classical pathway component
+        'C4B': 'ENSG00000224389'    # Complement C4B, similar to C4A with slight functional differences
+    },
+
+    # 2. Lectin Pathway Components
+    # These proteins function in the recognition and activation of the lectin pathway.
+    "lectin_pathway_components": {
+        'MBL2': 'ENSG00000165471',  # Mannose-binding lectin (MBL)
+        'FCN1': 'ENSG00000085265',  # Ficolin-1
+        'FCN2': 'ENSG00000160339',  # Ficolin-2
+        'FCN3': 'ENSG00000142748',  # Ficolin-3
+        'COLEC10': 'ENSG00000184374',  # Collectin-10 (CL-L1)
+        'COLEC11': 'ENSG00000118004'  # Collectin-11 (CL-K1)
+    },
+
+    # 3. Alternative Pathway Components
+    # These proteins are involved in the amplification loop of complement activation.
+    "alternative_pathway_components": {
+        'C3_ENSG00000125730': 'ENSG00000125730',  # Complement C3, central to all pathways
+        'CFB': 'ENSG00000243649',  # Complement Factor B, forms alternative C3 convertase
+        'CFD': 'ENSG00000197766',  # Complement Factor D, cleaves Factor B
+        'CFH': 'ENSG00000000971'   # Complement Factor H, regulates alternative pathway
+    },
+
+    # 4. Terminal Pathway and Membrane Attack Complex (MAC) Components
+    # These proteins mediate the formation of the membrane attack complex.
+    "terminal_pathway_components": {
+        'C5': 'ENSG00000106804',  # Complement C5, cleaved to C5a and C5b
+        'C6_ENSG00000039537': 'ENSG00000039537',  # Complement C6, MAC component
+        'C7_ENSG00000112936': 'ENSG00000112936',  # Complement C7, MAC component
+        'C8A': 'ENSG00000157131',  # Complement C8 alpha subunit
+        'C8B': 'ENSG00000021852',  # Complement C8 beta subunit
+        'C8G': 'ENSG00000176919',  # Complement C8 gamma subunit
+        'C9_ENSG00000113600': 'ENSG00000113600'   # Complement C9, final MAC component
+    }
+}
+
+complement_receptor_genes = {
+    # 1. Anaphylatoxin Receptors
+    # These receptors bind complement fragments (C3a, C5a) and mediate inflammatory responses.
+    "anaphylatoxin_receptors": {
+        'C3AR1': 'ENSG00000171860',  # C3a receptor, binds C3a to mediate inflammation
+        'C5AR1': 'ENSG00000197405',  # C5a receptor 1, binds C5a to trigger immune responses
+        'C5AR2': 'ENSG00000134830'   # C5a receptor 2, modulates C5a activity
+    },
+
+    # 2. Complement Receptors for Immune Complex Clearance & Phagocytosis
+    # These receptors recognize complement-opsonized particles and mediate phagocytosis.
+    "opsonin_receptors": {
+        'CR1': 'ENSG00000203710',  # Complement Receptor 1 (CD35), regulates complement and immune clearance
+        'CR2': 'ENSG00000117322',  # Complement Receptor 2 (CD21), involved in B-cell activation
+        'ITGAM': 'ENSG00000169896',  # Integrin Alpha M (CD11b), part of complement receptor 3 (CR3)
+        'ITGAX': 'ENSG00000140678',  # Integrin Alpha X (CD11c), part of complement receptor 4 (CR4)
+        'ITGB2': 'ENSG00000160255'   # Integrin Beta 2 (CD18), essential for CR3 and CR4 function
+    },
+
+    # 3. Soluble Complement Receptors & Other Regulatory Receptors
+    # These receptors modulate complement activation and prevent excessive inflammation.
+    "regulatory_receptors": {
+        'CD46': 'ENSG00000117335',  # Membrane cofactor protein (MCP), regulates complement activation
+        'CD55': 'ENSG00000196352',  # Decay-accelerating factor (DAF), inhibits C3/C5 convertases
+        'CD59': 'ENSG00000085063',  # Protectin, prevents MAC formation
+        'VSIG4': 'ENSG00000155659',  # Complement receptor of the Ig superfamily, inhibits complement activation
+        'CD93': 'ENSG00000125810'   # CD93, involved in immune cell adhesion and clearance of apoptotic cells
+    }
+}
+
+
+complement_regulator_genes = {
+    # 1. Regulators of Complement Activation (Cofactors & Inhibitors)
+    # These proteins directly regulate complement activation by acting as cofactors or inhibitors.
+    "cofactors_inhibitors": {
+        'CFI': 'ENSG00000205403',   # Complement Factor I, inactivates C3b and C4b by cleavage; prevents the formation of C3 and C5 convertases
+        'CD46': 'ENSG00000117335',  # Membrane cofactor protein (MCP), regulates C3b and C4b inactivation
+        'CD55': 'ENSG00000196352',  # Decay-accelerating factor (DAF), accelerates the decay of C3 and C5 convertases
+        'CD59': 'ENSG00000085063',  # Protectin, inhibits the formation of the membrane attack complex (MAC)
+        'C4BP': 'ENSG00000123843',  # C4-binding protein, inhibits C4b and regulates the classical and lectin pathways
+        'CFHR1': 'ENSG00000244414',  # Complement factor H-related protein 1, regulates the alternative pathway
+        'CFHR2': 'ENSG00000080910',  # Complement factor H-related protein 2, regulates the alternative pathway
+        'CFHR4': 'ENSG00000134365',  # Complement factor H-related protein 4, regulates complement
+        'CFHR5': 'ENSG00000134389'   # Complement factor H-related protein 5, regulates complement activation
+    },
+
+    # 2. Membrane Regulatory Proteins (Preventing Excessive Complement Activation)
+    # These membrane-bound proteins regulate complement activation locally at the cell surface.
+    "membrane_regulatory_proteins": {
+        'CD46': 'ENSG00000117335',  # MCP, regulates C3b and C4b inactivation
+        'CD55': 'ENSG00000196352',  # DAF, accelerates the decay of C3 and C5 convertases
+        'CD59': 'ENSG00000085063',  # Protectin, prevents MAC formation at the cell surface
+        'CR1': 'ENSG00000203710',   # Complement Receptor 1, acts as a cofactor for C3b and C4b inactivation
+        'VCP': 'ENSG00000165280'    # Valosin-containing protein, involved in the regulation of complement activation
+    },
+
+    # 3. Soluble Regulators
+    # These soluble proteins regulate complement components and prevent excessive immune activation.
+    "soluble_regulators": {
+        'CFH': 'ENSG00000000971',   # Complement Factor H, regulates the alternative pathway and C3 convertase
+        'C4BP': 'ENSG00000123843',  # C4-binding protein, acts as a cofactor for the degradation of C4b
+        'CLU': 'ENSG00000120885',   # Clusterin, involved in regulation of complement and prevention of MAC formation
+        'CR1': 'ENSG00000203710'    # Complement Receptor 1, inhibits complement activation
+    }
+}
