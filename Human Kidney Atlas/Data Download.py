@@ -1,4 +1,5 @@
 import cellxgene_census
+from pandas.io.parquet import to_parquet
 
 '''
 Use this script to download the data from the cellxgene server
@@ -30,15 +31,18 @@ Chronic Kidney Disease Data
 
 # cellxgene_census.download_source_h5ad(
 #     "f95d8919-1f2a-405f-8776-bfecc0ab0f3f",
-#     to_path="/Volumes/CHAMPANERI/Databases/Human_Nor_Kidney_CellHint_scRNA.h5ad"
+#     # to_path="/Volumes/CHAMPANERI/Databases/Human_Nor_Kidney_CellHint_scRNA.h5ad" # USB Location
+#     to_path="/Users/aumchampaneri/Databases/Human_Nor_Kidney_CellHint_scRNA.h5ad" # Disk Location
 # )
 
-# cellxgene_census.download_source_h5ad(
-#     "dea717d4-7bc0-4e46-950f-fd7e1cc8df7d",
-#     to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_scRNA.h5ad"
-# )
+cellxgene_census.download_source_h5ad(
+    "dea717d4-7bc0-4e46-950f-fd7e1cc8df7d",
+    # to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_scRNA.h5ad" # USB Location
+    to_path="/Users/aumchampaneri/Databases/Human_Nor-CKD-AKF_scRNA.h5ad" # Disk Location
+)
 
 # cellxgene_census.download_source_h5ad(
 #     "a12ccb9b-4fbe-457d-8590-ac78053259ef",
-#     to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_snRNA.h5ad"
+#     to_path="/Volumes/CHAMPANERI/Databases/Human_Nor-CKD-AKF_snRNA.h5ad" # USB Location
+#     to_path="/Users/aumchampaneri/Databases/Human_Nor-CKD-AKF_snRNA.h5ad" # Disk Location
 # )
