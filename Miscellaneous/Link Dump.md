@@ -47,7 +47,10 @@
 > 
 > Used 'All non-neuronal cells' for the Brain data
 
-
+> ### Single-Cell DNA Methylation and 3D Genome Human Brain Atlas
+> https://cellxgene.cziscience.com/collections/fdebfda9-bb9a-4b4b-97e5-651097ea07b0
+> 
+> Description: Delineating the gene regulatory programs underlying complex cell types is fundamental for understanding brain functions in health and disease. Here, we comprehensively examine human brain cell epigenomes by probing DNA methylation and chromatin conformation at single-cell resolution in over 500,000 cells from 46 brain regions. We identified 188 cell types and characterized their molecular signatures. Integrative analyses revealed concordant changes in DNA methylation, chromatin accessibility, chromatin organization, and gene expression across cell types, cortical areas, and basal ganglia structures. With these resources, we developed scMCodes that reliably predict brain cell types using their methylation status at select genomic sites. This multimodal epigenomic brain cell atlas provides new insights into the complexity of cell type-specific gene regulation in the adult human brain
 
 
 ## Mice Database
@@ -63,6 +66,11 @@
 > https://cellxgene.cziscience.com/collections/0b9d8a04-bb9d-44da-aa27-705bb65b54eb
 > 
 > Used for Kidney and Brain data
+
+> ### DNA Methylation Atlas of the Mouse Brain at Single-Cell Resolution
+> https://cellxgene.cziscience.com/collections/37f1f46d-6dfa-482c-9b17-d5850d8536f6
+> 
+> Mammalian brain cells are remarkably diverse in gene expression, anatomy, and function, yet the regulatory DNA landscape underlying this extensive heterogeneity is poorly understood. We carried out a comprehensive assessment of the epigenomes of mouse brain cell types by applying single nucleus DNA methylation sequencing to profile 110,294 nuclei from 45 regions of the mouse cortex, hippocampus, striatum, pallidum, and olfactory areas. We identified 161 cell clusters with distinct spatial locations and projection targets. We constructed taxonomies of these epigenetic types, annotated with signature genes, regulatory elements, and transcription factors. These features indicate the potential regulatory landscape supporting the assignment of putative cell types, and reveal repetitive usage of regulators in excitatory and inhibitory cells for determining subtypes. The DNA methylation landscape of excitatory neurons in the cortex and hippocampus varied continuously along spatial gradients. Using this deep dataset, an artificial neural network model was constructed that precisely predicts single neuron cell-type identity and brain area spatial location. Integration of high-resolution DNA methylomes with single-nucleus chromatin accessibility data allowed prediction of high-confidence enhancer-gene interactions for all identified cell types, which were subsequently validated by cell-type-specific chromatin conformation capture experiments. By combining multi-omic datasets (DNA methylation, chromatin contacts, and open chromatin) from single nuclei and annotating the regulatory genome of hundreds of cell types in the mouse brain, our DNA methylation atlas establishes the epigenetic basis for neuronal diversity and spatial organization throughout the mouse brain.
 
 # Miscellaneous
 
