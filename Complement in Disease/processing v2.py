@@ -1,7 +1,23 @@
 import scanpy as sc
+import anndata as ad
 
-adatas = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Human_Nor-CKD-AKF_scRNA.h5ad")
+adata_sc = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Human_Nor-CKD-AKF_scRNA.h5ad")
+adata_sn = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Human_Nor-CKD-AKF_snRNA.h5ad")
 
+#%%
+
+# Ensure both datasets have the same columns in .obs
+common_obs_columns = set(adata_sc.obs.columns).intersection(set(adata_sn.obs.columns))
+adata_sc.obs = adata_sc.obs[common_obs_columns]
+adata_sn.obs = adata_sn.obs[common_obs_columns]
+
+# Concatenate the datasets
+adata = ad.concat(
+    [adata_sc, adata_sn],
+    join='outer'  # Keep all genes from both datasets
+)
+
+#%%
 '''
 Data is from CellxGene. Can expect it has been preprocessed.
 Out of a abundance of caution, we will reprocess the data to ensure it is clean and ready for analysis.
