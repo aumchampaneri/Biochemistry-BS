@@ -5,8 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.sparse
 
-# Load the processed data
-adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Human_Nor-CKD-AKF_scRNA_processed.h5ad")
+# Load the processed data -- Load only the dataset you want to plot
+adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Hs_Nor-CKD-AKF_scRNA_processed.h5ad") # Full dataset
 
 # Load the gene dictionary from the csv file
 gene_dict = {}
@@ -26,3 +26,4 @@ for group, cell_types in cell_type_group.items():
     adata.obs.loc[adata.obs['cell_type'].isin(cell_types), 'cell_type_group'] = group
 
 #%%
+
