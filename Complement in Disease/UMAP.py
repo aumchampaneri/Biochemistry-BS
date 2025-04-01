@@ -31,15 +31,15 @@ UMAP Plotting
 This code will plot UMAP for the processed data and color the points by cell type and tissue type.
 '''
 
-# # Plot UMAP colored by cell type
-# sc.pl.umap(adata_tot,
-#            color='cell_type',
-#            save='_cell-type.pdf')
-#
-# # Plot the UMAP colored by tissue type
-# sc.pl.umap(adata_tot,
-#            color=['cell_type_group'],
-#            save='_cell-type-group.pdf')
+# Plot UMAP colored by cell type
+sc.pl.umap(adata,
+           color='cell_type',
+           save='_cell-type.pdf')
+
+# Plot the UMAP colored by tissue type
+sc.pl.umap(adata,
+           color=['cell_type_group'],
+           save='_cell-type-group.pdf')
 
 #%%
 '''
