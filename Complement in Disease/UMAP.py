@@ -56,7 +56,38 @@ The UMAP plot is saved to a specified path if provided.
 # noinspection PyTypeChecker
 def umap_gene_expression(adata, gene1, gene2, gene_dict, save_path=None):
     """
-    Plots UMAP visualization of two gene expressions with a custom colormap.
+    Creates a UMAP visualization of two genes' expression patterns across cells with a custom colormap.
+
+    This function plots cells on a UMAP projection and colors each cell based on the relative expression
+    of two genes, using a bivariate color scheme:
+    - Red: High expression of gene1, low expression of gene2
+    - Blue: Low expression of gene1, high expression of gene2
+    - Purple: High expression of both genes
+    - White/light gray: Low expression of both genes
+
+    Parameters
+    ----------
+    adata : AnnData
+        AnnData object containing single-cell RNA-seq data with UMAP coordinates in adata.obsm['X_umap'].
+    gene1 : str
+        Name of the first gene to visualize (will be mapped to red).
+    gene2 : str
+        Name of the second gene to visualize (will be mapped to blue).
+    gene_dict : dict
+        Dictionary mapping gene names to Ensembl IDs for lookup in the expression matrix.
+    save_path : str, optional
+        Path to save the figure. If None, the figure is displayed but not saved.
+
+    Returns
+    -------
+    None
+        The function displays or saves the plot but doesn't return any values.
+
+    Notes
+    -----
+    - Expression values are min-max normalized for each gene before visualization
+    - A small legend is added showing the bivariate color scale
+    - The function handles both sparse and dense expression matrices
     """
 
     # Fetch Ensembl ID from dictionary or return original gene name
