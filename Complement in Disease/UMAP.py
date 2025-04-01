@@ -194,7 +194,7 @@ def umap_gene_expression(adata, disease, gene1, gene2, gene_dict, save_path=None
     else:
         plt.show()
 
-disease = 'AKI' # Choose the disease you want to plot (AKI, CKD, Reference)
+disease = 'Reference' # Choose the disease you want to plot (AKI, CKD, Reference)
 
 # Plot UMAP of C3 and CFH expression
 umap_gene_expression(adata, f"{disease}", "CFH", "C3", gene_dict, save_path=f"{disease}_umap_CFHvC3.pdf")
