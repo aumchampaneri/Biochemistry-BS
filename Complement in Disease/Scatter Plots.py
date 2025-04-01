@@ -101,31 +101,27 @@ def scatter_gene_expression(adata, disease, gene1, gene2, gene_dict, color_by='c
         plt.savefig(save_path, bbox_inches='tight')
     else:
         plt.show()
-        
 
-
-#%%
-
-disease = 'AKI' # Choose the disease you want to plot (AKI, CKD, Reference)
+disease = 'CKD' # Choose the disease you want to plot (AKI, CKD, Reference)
 color = 'cell_type_group' # Choose the color you want to plot (cell_type, cell_type_group)
 
 # Plot scatter plot of C3 and CFH expression
-scatter_gene_expression(adata, f"{disease}", "CFH", "C3", gene_dict, save_path=f"{disease}_{color}_scatter_CFHvC3.pdf")
+scatter_gene_expression(adata, f"{disease}", "CFH", "C3", gene_dict, color_by=f"{color}", save_path=f"{disease}_{color}_scatter_CFHvC3.pdf")
 
 # Plot scatter plot of CFH and C3ar1 expression
-scatter_gene_expression(adata, f"{disease}", "CFH", "C3AR1", gene_dict, save_path=f"{disease}_{color}_scatter_CFHvC3ar1.pdf")
+scatter_gene_expression(adata, f"{disease}", "CFH", "C3AR1", gene_dict, color_by=f"{color}", save_path=f"{disease}_{color}_scatter_CFHvC3ar1.pdf")
 
 # Plot scatter plot of CFH and C5ar1 expression
-scatter_gene_expression(adata, f"{disease}", "CFH", "C5AR1", gene_dict, save_path=f"{disease}_{color}_scatter_CFHvC5ar1.pdf")
+scatter_gene_expression(adata, f"{disease}", "CFH", "C5AR1", gene_dict, color_by=f"{color}", save_path=f"{disease}_{color}_scatter_CFHvC5ar1.pdf")
 
 # Plot scatter plot of CFH and C5ar2 expression
-scatter_gene_expression(adata, f"{disease}", "CFH", "C5AR2", gene_dict, save_path=f"{disease}_{color}_scatter_CFHvC5ar2.pdf")
+scatter_gene_expression(adata, f"{disease}", "CFH", "C5AR2", gene_dict, color_by=f"{color}", save_path=f"{disease}_{color}_scatter_CFHvC5ar2.pdf")
 
 # Plot scatter plot of C3ar1 and C5ar1 expression
-scatter_gene_expression(adata, f"{disease}", "C3AR1", "C5AR1", gene_dict, save_path=f"{disease}_{color}_scatter_C3ar1vC5ar1.pdf")
+scatter_gene_expression(adata, f"{disease}", "C3AR1", "C5AR1", gene_dict, color_by=f"{color}", save_path=f"{disease}_{color}_scatter_C3ar1vC5ar1.pdf")
 
 # Plot scatter plot of C3ar1 and C5ar2 expression
-scatter_gene_expression(adata, f"{disease}", "C3AR1", "C5AR2", gene_dict, save_path=f"{disease}_{color}_scatter_C3ar1vC5ar2.pdf")
+scatter_gene_expression(adata, f"{disease}", "C3AR1", "C5AR2", gene_dict, color_by=f"{color}", save_path=f"{disease}_{color}_scatter_C3ar1vC5ar2.pdf")
 
 # Plot scatter plot of C5ar1 and C5ar2 expression
-scatter_gene_expression(adata, f"{disease}", "C5AR1", "C5AR2", gene_dict, save_path=f"{disease}_{color}_scatter_C5ar1vC5ar2.pdf")
+scatter_gene_expression(adata, f"{disease}", "C5AR1", "C5AR2", gene_dict, color_by=f"{color}", save_path=f"{disease}_{color}_scatter_C5ar1vC5ar2.pdf")
