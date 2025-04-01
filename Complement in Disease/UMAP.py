@@ -5,8 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.sparse
 
-# Load the processed data
-adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Human_Nor-CKD-AKF_scRNA_processed.h5ad")
+# Load the processed data -- Load only the dataset you want to plot
+adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Hs_Nor-CKD-AKF_scRNA_processed.h5ad") # Full dataset
 
 # Load the gene dictionary from the csv file
 gene_dict = {}
@@ -31,15 +31,15 @@ UMAP Plotting
 This code will plot UMAP for the processed data and color the points by cell type and tissue type.
 '''
 
-# Plot UMAP colored by cell type
-sc.pl.umap(adata,
-           color='cell_type',
-           save='_cell-type.pdf')
-
-# Plot the UMAP colored by tissue type
-sc.pl.umap(adata,
-           color=['cell_type_group'],
-           save='_cell-type-group.pdf')
+# # Plot UMAP colored by cell type
+# sc.pl.umap(adata_tot,
+#            color='cell_type',
+#            save='_cell-type.pdf')
+#
+# # Plot the UMAP colored by tissue type
+# sc.pl.umap(adata_tot,
+#            color=['cell_type_group'],
+#            save='_cell-type-group.pdf')
 
 #%%
 '''
@@ -54,7 +54,7 @@ The UMAP plot is saved to a specified path if provided.
 
 
 # noinspection PyTypeChecker
-def umap_gene_expression(adata, gene1, gene2, gene_dict, save_path=None):
+def umap_gene_expression(adata, disease, gene1, gene2, gene_dict, save_path=None):
     """
     Creates a UMAP visualization of two genes' expression patterns across cells with a custom colormap.
 
@@ -69,6 +69,8 @@ def umap_gene_expression(adata, gene1, gene2, gene_dict, save_path=None):
     ----------
     adata : AnnData
         AnnData object containing single-cell RNA-seq data with UMAP coordinates in adata.obsm['X_umap'].
+    disease : str
+        The disease state to subset (e.g., 'AKI', 'CKD', 'Reference').
     gene1 : str
         Name of the first gene to visualize (will be mapped to red).
     gene2 : str
@@ -89,6 +91,9 @@ def umap_gene_expression(adata, gene1, gene2, gene_dict, save_path=None):
     - A small legend is added showing the bivariate color scale
     - The function handles both sparse and dense expression matrices
     """
+
+    # Subset data based on disease type
+    adata = adata[adata.obs['diseasetype'] == disease, :].copy()
 
     # Fetch Ensembl ID from dictionary or return original gene name
     def get_ensembl_id(gene_name):
@@ -189,23 +194,25 @@ def umap_gene_expression(adata, gene1, gene2, gene_dict, save_path=None):
     else:
         plt.show()
 
+disease = 'AKI' # Choose the disease you want to plot (AKI, CKD, Reference)
+
 # Plot UMAP of C3 and CFH expression
-umap_gene_expression(adata, "CFH", "C3", gene_dict, save_path="umap_CFHvC3.pdf")
+umap_gene_expression(adata, f"{disease}", "CFH", "C3", gene_dict, save_path=f"{disease}_umap_CFHvC3.pdf")
 
 # Plot UMAP of CFH and C3ar1 expression
-umap_gene_expression(adata, "CFH", "C3AR1", gene_dict, save_path="umap_CFHvC3ar1.pdf")
+umap_gene_expression(adata, f"{disease}", "CFH", "C3AR1", gene_dict, save_path=f"{disease}_umap_CFHvC3ar1.pdf")
 
 # Plot UMAP of CFH and C5ar1 expression
-umap_gene_expression(adata, "CFH", "C5AR1", gene_dict, save_path="umap_CFHvC5ar1.pdf")
+umap_gene_expression(adata, f"{disease}", "CFH", "C5AR1", gene_dict, save_path=f"{disease}_umap_CFHvC5ar1.pdf")
 
 # Plot UMAP of CFH and C5ar2 expression
-umap_gene_expression(adata, "CFH", "C5AR2", gene_dict, save_path="umap_CFHvC5ar2.pdf")
+umap_gene_expression(adata, f"{disease}", "CFH", "C5AR2", gene_dict, save_path=f"{disease}_umap_CFHvC5ar2.pdf")
 
 # Plot UMAP of C3ar1 and C5ar1 expression
-umap_gene_expression(adata, "C3AR1", "C5AR1", gene_dict, save_path="umap_C3ar1vC5ar1.pdf")
+umap_gene_expression(adata, f"{disease}", "C3AR1", "C5AR1", gene_dict, save_path=f"{disease}_umap_C3ar1vC5ar1.pdf")
 
 # Plot UMAP of C3ar1 and C5ar2 expression
-umap_gene_expression(adata, "C3AR1", "C5AR2", gene_dict, save_path="umap_C3ar1vC5ar2.pdf")
+umap_gene_expression(adata, f"{disease}", "C3AR1", "C5AR2", gene_dict, save_path=f"{disease}_umap_C3ar1vC5ar2.pdf")
 
 # Plot UMAP of C5ar1 and C5ar2 expression
-umap_gene_expression(adata, "C5AR1", "C5AR2", gene_dict, save_path="umap_C5ar1vC5ar2.pdf")
+umap_gene_expression(adata, f"{disease}", "C5AR1", "C5AR2", gene_dict, save_path=f"{disease}_umap_C5ar1vC5ar2.pdf")
