@@ -1,6 +1,6 @@
 import scanpy as sc
 
-adatas = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Human_Nor-CKD-AKF_scRNA.h5ad")
+adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Human_Nor-CKD-AKF_scRNA.h5ad")
 
 '''
 Data is from CellxGene. Can expect it has been preprocessed.

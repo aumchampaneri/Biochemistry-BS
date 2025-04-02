@@ -55,9 +55,10 @@ mitochondiral_response = ['NLRP3', 'CASP1', 'CASP4', 'CASP5', 'CASP8', 'CASP9', 
 
 
 #%%
+# Denedrogram == .add_dendrogram(show=True, size=0.9)
 
 # Subset data based on disease type
-disease = 'Reference' # Choose the disease you want to plot (AKI, CKD, Reference)
+disease = 'AKI' # Choose the disease you want to plot (AKI, CKD, Reference)
 adata = adata[adata.obs['diseasetype'] == disease, :].copy()
 
 # Change the groupby variable to the one you want to plot
@@ -75,7 +76,7 @@ sc.pl.MatrixPlot(adata,
                  use_raw=False,
                  log=False,
                  # title='Complement Genes Expression in Kidney Cells',
-                 ).add_dendrogram(show=True, size=0.9).style(cmap='plasma', edge_color='none').savefig(f'{disease}_{subset}_matrix_{gene_list_f}.pdf')
+                 ).style(cmap='plasma', edge_color='none').savefig(f'{disease}_{subset}_matrix-nd_{gene_list_f}.pdf')
 
 # Change the groupby variable to the one you want to plot
 subset = 'cell_type' # Choose the groupby variable you want to plot (cell_type, cell_type_group)
@@ -87,4 +88,4 @@ sc.pl.MatrixPlot(adata,
                  use_raw=False,
                  log=False,
                  # title='Complement Genes Expression in Kidney Cells',
-                 ).add_dendrogram(show=True, size=0.9).style(cmap='plasma', edge_color='none').savefig(f'{disease}_{subset}_matrix_{gene_list_f}.pdf')
+                 ).style(cmap='plasma', edge_color='none').savefig(f'{disease}_{subset}_matrix-nd_{gene_list_f}.pdf')
