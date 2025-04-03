@@ -40,6 +40,8 @@ adata.obs['cell_type_group'] = 'Other'
 for group, cell_types in cell_type_group.items():
     adata.obs.loc[adata.obs['cell_type'].isin(cell_types), 'cell_type_group'] = group
 
+#%%
+
 def volcano_plot(
     adata,
     gene_dict,
