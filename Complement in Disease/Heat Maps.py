@@ -45,7 +45,8 @@ for group, cell_types in cell_type_group.items():
 def differential_expression_heatmap(
     adata, gene_dict, groupby="cell_type", group1="Reference", group2="CKD",
     save_path=None, title_fontsize=16, tick_fontsize=12, annot_fontsize=10,
-    colorbar_position=[0.85, 0.75, 0.03, 0.2], figsize=(15, 12), dendrogram_ratio=(0.05, 0.2)
+    colorbar_position=[0.85, 0.75, 0.03, 0.2], figsize=(15, 12), dendrogram_ratio=(0.05, 0.2),
+    colormap="bwr"  # New parameter for colormap
 ):
     """
     Generates a clustered heatmap showing log fold change (logFC) in gene expression
@@ -77,6 +78,8 @@ def differential_expression_heatmap(
         Size of the heatmap figure (default: (15, 12)).
     dendrogram_ratio : tuple, optional
         Ratio of space allocated to the dendrograms (default: (0.05, 0.2)).
+    colormap : str, optional
+        Colormap to use for the heatmap (default: "bwr").
 
     Returns
     -------
@@ -95,6 +98,9 @@ def differential_expression_heatmap(
     # Extract expression data for selected genes
     expression_data = adata[:, valid_ensembl_ids].to_df()
     expression_data = expression_data.join(adata.obs[[groupby, "diseasetype"]])
+
+    # Normalize data to 1e4 and log transform
+    expression_data[valid_ensembl_ids] = np.log1p(expression_data[valid_ensembl_ids] / 1e4)
 
     # Check if both groups exist in the dataset
     if group1 not in expression_data["diseasetype"].values or group2 not in expression_data["diseasetype"].values:
@@ -121,7 +127,7 @@ def differential_expression_heatmap(
     # Plot heatmap with larger box size and adjusted dendrogram ratio
     g = sns.clustermap(
         logFC_data.T,
-        cmap="bwr", center=0, linewidths=0.5, annot=True, fmt=".2f",
+        cmap=colormap, center=0, linewidths=0.5, annot=True, fmt=".2f",  # Use colormap parameter
         row_cluster=True, col_cluster=False, row_linkage=row_linkage,
         figsize=figsize, annot_kws={"size": annot_fontsize},
         xticklabels=True, yticklabels=True,
@@ -169,11 +175,17 @@ mitochondiral_response = ['NLRP3', 'CASP1', 'CASP4', 'CASP5', 'CASP8', 'CASP9', 
 disease = 'CKD' # Choose the disease you want to plot (AKI, CKD, Reference)
 
 # Change the groupby variable to the one you want to plot
-subset = 'cell_type' # Choose the groupby variable you want to plot (cell_type, cell_type_group)
+subset = 'cell_type_group' # Choose the groupby variable you want to plot (cell_type, cell_type_group)
 
 # change the gene list to the one you want to plot
 gene_list_f = 'gene_dict_names' # Change this to match the gene list you are plotting for the filename
 gene_list = gene_dict_names
 
 # Fix the function call by passing gene_dict instead of gene_list
-differential_expression_heatmap(adata, gene_dict, groupby=f"{subset}", group1="Reference", group2="CKD", save_path=f"{disease}_{subset}_logFC-heatmap_{gene_list_f}.pdf", title_fontsize=14, tick_fontsize=8, annot_fontsize=6, colorbar_position=[0.98, 0.30, 0.01, 0.50], figsize=(12, 17), dendrogram_ratio=(0.05, 0.2))
+differential_expression_heatmap(
+    adata, gene_dict, groupby=f"{subset}", group1="Reference", group2=f"{disease}",
+    save_path=f"{disease}_{subset}_logFC-heatmap_{gene_list_f}.pdf", title_fontsize=14,
+    tick_fontsize=8, annot_fontsize=6, colorbar_position=[0.98, 0.30, 0.01, 0.50],
+    figsize=(12, 17), dendrogram_ratio=(0.05, 0.2), colormap="RdYlBu"  # Use a diverging colormap
+)
+
