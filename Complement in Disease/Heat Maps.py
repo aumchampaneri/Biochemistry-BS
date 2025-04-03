@@ -41,15 +41,14 @@ for group, cell_types in cell_type_group.items():
 
 #%%
 
-
 def differential_expression_heatmap(
-    adata, gene_dict, groupby="cell_type", group1="Reference", group2="CKD",
-    save_path=None, title_fontsize=16, tick_fontsize=12, annot_fontsize=10,
-    colorbar_position=[0.85, 0.75, 0.03, 0.2], figsize=(15, 12), dendrogram_ratio=(0.05, 0.2),
-    colormap="bwr"  # New parameter for colormap
+        adata, gene_dict, groupby="cell_type", group1="Reference", group2="CKD",
+        save_path=None, title_fontsize=16, tick_fontsize=12, annot_fontsize=10,
+        colorbar_position=[0.85, 0.75, 0.03, 0.2], figsize=(15, 12), dendrogram_ratio=(0.05, 0.2),
+        colormap="bwr", show_dendrogram=True  # Added parameter
 ):
     """
-    Generates a clustered heatmap showing log fold change (logFC) in gene expression
+    Generates a heatmap showing log fold change (logFC) in gene expression
     between two groups across cell types.
 
     Parameters
@@ -80,6 +79,8 @@ def differential_expression_heatmap(
         Ratio of space allocated to the dendrograms (default: (0.05, 0.2)).
     colormap : str, optional
         Colormap to use for the heatmap (default: "bwr").
+    show_dendrogram : bool, optional
+        Whether to show the dendrogram (True) or create a simple heatmap (False).
 
     Returns
     -------
@@ -107,8 +108,10 @@ def differential_expression_heatmap(
         raise ValueError(f"One or both groups ({group1}, {group2}) not found in the dataset.")
 
     # Compute mean expression per cell type for both groups
-    group1_mean = expression_data.loc[expression_data["diseasetype"] == group1].groupby(groupby)[valid_ensembl_ids].mean()
-    group2_mean = expression_data.loc[expression_data["diseasetype"] == group2].groupby(groupby)[valid_ensembl_ids].mean()
+    group1_mean = expression_data.loc[expression_data["diseasetype"] == group1].groupby(groupby)[
+        valid_ensembl_ids].mean()
+    group2_mean = expression_data.loc[expression_data["diseasetype"] == group2].groupby(groupby)[
+        valid_ensembl_ids].mean()
 
     # Use adaptive pseudocount
     min_nonzero = max(expression_data[valid_ensembl_ids].replace(0, np.nan).min().min(), 1e-6)
@@ -121,26 +124,47 @@ def differential_expression_heatmap(
     logFC_data.index.name = "Cell Type"
     logFC_data.columns = gene_labels
 
-    # Cluster genes using hierarchical clustering
-    row_linkage = sch.linkage(logFC_data.T, method="ward")
+    if show_dendrogram:
+        # Cluster genes using hierarchical clustering
+        row_linkage = sch.linkage(logFC_data.T, method="ward")
 
-    # Plot heatmap with larger box size and adjusted dendrogram ratio
-    g = sns.clustermap(
-        logFC_data.T,
-        cmap=colormap, center=0, linewidths=0.5, annot=True, fmt=".2f",  # Use colormap parameter
-        row_cluster=True, col_cluster=False, row_linkage=row_linkage,
-        figsize=figsize, annot_kws={"size": annot_fontsize},
-        xticklabels=True, yticklabels=True,
-        dendrogram_ratio=dendrogram_ratio,  # Reduce dendrogram size to expand heatmap area
-        cbar_pos=colorbar_position  # Reposition colorbar
-    )
+        # Plot heatmap with clustering
+        g = sns.clustermap(
+            logFC_data.T,
+            cmap=colormap, center=0, linewidths=0.5, annot=True, fmt=".2f",
+            row_cluster=True, col_cluster=False, row_linkage=row_linkage,
+            figsize=figsize, annot_kws={"size": annot_fontsize},
+            xticklabels=True, yticklabels=True,
+            dendrogram_ratio=dendrogram_ratio,
+            cbar_pos=colorbar_position
+        )
 
-    # Set title with adjustable font size
-    g.ax_heatmap.set_title(f"Log Fold Change (logFC) in Gene Expression: {group2} vs {group1}", fontsize=title_fontsize)
+        # Set title with adjustable font size
+        g.ax_heatmap.set_title(f"Log Fold Change (logFC) in Gene Expression: {group2} vs {group1}",
+                               fontsize=title_fontsize)
 
-    # Rotate x-axis labels and set font sizes
-    plt.setp(g.ax_heatmap.xaxis.get_majorticklabels(), rotation=45, ha="right", fontsize=tick_fontsize)
-    plt.setp(g.ax_heatmap.yaxis.get_majorticklabels(), fontsize=tick_fontsize)
+        # Rotate x-axis labels and set font sizes
+        plt.setp(g.ax_heatmap.xaxis.get_majorticklabels(), rotation=45, ha="right", fontsize=tick_fontsize)
+        plt.setp(g.ax_heatmap.yaxis.get_majorticklabels(), fontsize=tick_fontsize)
+
+        fig = g.fig
+    else:
+        # Create a simple heatmap without dendrogram
+        fig, ax = plt.subplots(figsize=figsize)
+        g = sns.heatmap(
+            logFC_data.T,
+            cmap=colormap, center=0, linewidths=0.5, annot=True, fmt=".2f",
+            ax=ax, cbar=True,
+            xticklabels=True, yticklabels=True,
+            annot_kws={"size": annot_fontsize}
+        )
+
+        # Set title with adjustable font size
+        ax.set_title(f"Log Fold Change (logFC) in Gene Expression: {group2} vs {group1}", fontsize=title_fontsize)
+
+        # Rotate x-axis labels and set font sizes
+        plt.setp(ax.xaxis.get_majorticklabels(), rotation=45, ha="right", fontsize=tick_fontsize)
+        plt.setp(ax.yaxis.get_majorticklabels(), fontsize=tick_fontsize)
 
     # Save or show plot
     if save_path:
@@ -148,7 +172,7 @@ def differential_expression_heatmap(
     else:
         plt.show()
 
-    return g.fig
+    return fig
 
 #%%
 '''
@@ -175,7 +199,7 @@ mitochondiral_response = ['NLRP3', 'CASP1', 'CASP4', 'CASP5', 'CASP8', 'CASP9', 
 disease = 'CKD' # Choose the disease you want to plot (AKI, CKD, Reference)
 
 # Change the groupby variable to the one you want to plot
-subset = 'cell_type_group' # Choose the groupby variable you want to plot (cell_type, cell_type_group)
+subset = 'cell_type' # Choose the groupby variable you want to plot (cell_type, cell_type_group)
 
 # change the gene list to the one you want to plot
 gene_list_f = 'gene_dict_names' # Change this to match the gene list you are plotting for the filename
@@ -186,6 +210,5 @@ differential_expression_heatmap(
     adata, gene_dict, groupby=f"{subset}", group1="Reference", group2=f"{disease}",
     save_path=f"{disease}_{subset}_logFC-heatmap_{gene_list_f}.pdf", title_fontsize=14,
     tick_fontsize=8, annot_fontsize=6, colorbar_position=[0.98, 0.30, 0.01, 0.50],
-    figsize=(12, 17), dendrogram_ratio=(0.05, 0.2), colormap="RdYlBu"  # Use a diverging colormap
+    figsize=(12, 17), dendrogram_ratio=(0.05, 0.2), colormap="RdYlBu", show_dendrogram=True  # Use a diverging colormap
 )
-
