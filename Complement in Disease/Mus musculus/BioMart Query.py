@@ -15,8 +15,8 @@ complement_genes = {
     # Core complement components (classical, alternative, and lectin pathways)
     "core_complement": [
         "C1qa", "C1qb", "C1qc",      # C1q subunits
-        "C1r", "C1s",               # C1 proteases
-        "C2", "C3", "C4", "C5",
+        "C1r", "C1s", "C1rl"              # C1 proteases
+        "C2", "C3", "C4", "C5", "Hc", #C5 is Hc
         "C6", "C7", "C8a", "C8b", "C8g", "C9"
     ],
 
@@ -43,7 +43,7 @@ complement_genes = {
 
     # Complement receptors
     "complement_receptors": [
-        "Cr2",   # CR1: mouse lacks a true CR1; the Cr2 gene produces both CR1/CR2 isoforms
+        "Cr1",   # CR1: mouse lacks a true CR1; the Cr2 gene produces both CR1/CR2 isoforms
         "Cr2",   # CR2
         "Itgam", # CR3 (CD11b, alpha chain)
         "Itgax", # CR4 (CD11c, alpha chain)
