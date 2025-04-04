@@ -10,6 +10,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/Kidney Acid Masceration Data Test/tableConvert.com_brr1xf.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/Kidney Acid Masceration Data Test/tableConvert.com_octorp.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/Miscellaneous/Human_Ensembl_Codes.csv">
           <value>
             <Attribute>
