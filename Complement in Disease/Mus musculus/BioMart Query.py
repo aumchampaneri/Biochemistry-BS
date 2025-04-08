@@ -1,7 +1,7 @@
 import scanpy as sc
 import pandas as pd
 
-adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Mm_HKA-pp.h5ad")
+adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Mm_MKA-pp.h5ad")
 
 # Returns a DataFrame with all Ensembl gene IDs and external gene names in the Mus musculus genome
 biomart_query = sc.queries.biomart_annotations("mmusculus", # Query for Mus musculus

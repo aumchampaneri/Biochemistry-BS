@@ -2,7 +2,7 @@ import scanpy as sc
 import yaml
 
 # Load the processed data
-adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Mm_HKA-pp.h5ad")
+adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Mm_MKA-pp.h5ad")
 
 # Define the dictionary for cell types
 cell_type_groups = {

@@ -21,4 +21,4 @@ sc.pp.normalize_total(adata, target_sum=1e4)
 sc.pp.log1p(adata)
 
 # Save the processed data
-sc.write("/Users/aumchampaneri/Databases/Mm_HKA-pp.h5ad", adata)
+sc.write("/Users/aumchampaneri/Databases/Mm_MKA-pp.h5ad", adata)
