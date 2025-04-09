@@ -14,9 +14,9 @@ biomart_query = sc.queries.biomart_annotations("mmusculus", # Query for Mus musc
 complement_genes = {
     # Core complement components (classical, alternative, and lectin pathways)
     "core_complement": [
-        "C1qa", "C1qb", "C1qc",      # C1q subunits
-        "C1r", "C1s", "C1rl"              # C1 proteases
-        "C2", "C3", "C4", "C5", "Hc", #C5 is Hc
+        "C1qa", "C1qb", "C1qc",  # C1q subunits
+        "C1r", "C1s",  # C1 proteases
+        "C2", "C2_ENSMUSG00000024371", "C3", "C3_ENSMUSG00000024164", "C4", "Hc",  #C5 is Hc
         "C6", "C7", "C8a", "C8b", "C8g", "C9"
     ],
 
