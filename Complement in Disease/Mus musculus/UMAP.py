@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import scipy.sparse
 
 # Load the processed data -- Load only the dataset you want to plot
-adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Mm_MKA-pp.h5ad") # Full dataset
+adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Mm_MKA-pp.h5ad") # Normal dataset
 
 # Load the gene dictionary from the csv file
 gene_dict = {}
