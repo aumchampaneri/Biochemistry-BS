@@ -10,13 +10,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/Complement in Disease/Mus musculus/complement_gene_dictionary.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/Miscellaneous/Human_Ensembl_Codes.csv">
           <value>
             <Attribute>
