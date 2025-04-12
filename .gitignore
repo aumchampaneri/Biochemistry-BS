@@ -170,3 +170,14 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 /Thesis Project/Kidney/KidneyData.h5ad
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594468_E3019_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594469_A3020_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594470_F3021_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594471_G3022_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594472_H3023_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594473_N3024_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594474_B3025_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594475_A3026_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594476_B3027_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594477_C3028_raw_feature_bc_matrix.h5
+Complement in Disease/Mus musculus/DKD/raw_data/GSM5594478_A3029_raw_feature_bc_matrix.h5
