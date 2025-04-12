@@ -31,8 +31,8 @@ def run_cellbender(sample_id, file_name, use_cuda=False):
             "cellbender", "remove-background",
             "--input", input_file,
             "--output", output_file,
-            "--expected-cells", "3000",
-            "--total-droplets-included", "20000",
+            # "--expected-cells", "3000",
+            # "--total-droplets-included", "20000",
             "--zdim", "0"  # Disable checkpoint saving
         ]
         if use_cuda:
