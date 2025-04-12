@@ -3,8 +3,8 @@ import subprocess
 import time
 
 # === SETTINGS ===
-input_dir = "/Users/aumchampaneri/PycharmProjects/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/raw_data"
-output_dir = "/Users/aumchampaneri/PycharmProjects/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/cleaned_data"
+input_dir = '/Users/aumchampaneri/PycharmProjects/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/raw_data'
+output_dir = '/Users/aumchampaneri/PycharmProjects/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/cleaned_data'
 os.makedirs(output_dir, exist_ok=True)
 
 # Define the sample to process
@@ -12,7 +12,7 @@ sample_id = "GSM5594468"
 file_name = "GSM5594468_E3019_raw_feature_bc_matrix.h5"
 
 # === FUNCTION TO RUN CELLBENDER ===
-def run_cellbender(sample_id, file_name):
+def run_cellbender(sample_id, file_name, use_cuda=False):
     input_file = os.path.join(input_dir, file_name)
     output_file = os.path.join(output_dir, f"{sample_id}_cleaned.h5")
 
@@ -26,15 +26,18 @@ def run_cellbender(sample_id, file_name):
         # Measure runtime
         start_time = time.time()
 
-        # Run CellBender
+        # Build the CellBender command
         command = [
             "cellbender", "remove-background",
             "--input", input_file,
             "--output", output_file,
-            "--cuda", "False",  # Set to "True" if you have a GPU
-            "--expected-cells", "3000",  # Adjust based on your dataset
-            "--total-droplets-included", "20000"  # Adjust based on your dataset
+            "--expected-cells", "3000",
+            "--total-droplets-included", "20000",
+            "--zdim", "0"  # Disable checkpoint saving
         ]
+        if use_cuda:
+            command.append("--cuda")  # Add the --cuda flag only if GPU is enabled
+
         print(f"📜 Running command: {' '.join(command)}")
         subprocess.run(command, check=True)
 
@@ -47,4 +50,4 @@ def run_cellbender(sample_id, file_name):
         print(f"❌ Error processing {sample_id}: {str(e)}")
 
 # === RUN THE SCRIPT FOR ONE SAMPLE ===
-run_cellbender(sample_id, file_name)
+run_cellbender(sample_id, file_name, use_cuda=False)  # Set use_cuda=True if you want to use a GPU
