@@ -10,17 +10,17 @@ output_dir <- "/workspaces/Biochemistry-BS/Complement in Disease/Mus musculus/DK
 dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
 
 samples <- list(
-  "GSM5594468" = "GSM5594468_E3019_raw_feature_bc_matrix.h5",
-  "GSM5594469" = "GSM5594469_A3020_raw_feature_bc_matrix.h5",
-  "GSM5594470" = "GSM5594470_F3021_raw_feature_bc_matrix.h5",
-  "GSM5594471" = "GSM5594471_G3022_raw_feature_bc_matrix.h5",
-  "GSM5594472" = "GSM5594472_H3023_raw_feature_bc_matrix.h5",
-  "GSM5594473" = "GSM5594473_N3024_raw_feature_bc_matrix.h5",
-  "GSM5594474" = "GSM5594474_B3025_raw_feature_bc_matrix.h5",
-  "GSM5594475" = "GSM5594475_A3026_raw_feature_bc_matrix.h5",
-  "GSM5594476" = "GSM5594476_B3027_raw_feature_bc_matrix.h5",
-  "GSM5594477" = "GSM5594477_C3028_raw_feature_bc_matrix.h5",
-  "GSM5594478" = "GSM5594478_A3029_raw_feature_bc_matrix.h5"
+  "GSM5594468" = "GSM5594468_E3019_raw_feature_bc_matrix.h5"
+  # "GSM5594469" = "GSM5594469_A3020_raw_feature_bc_matrix.h5",
+  # "GSM5594470" = "GSM5594470_F3021_raw_feature_bc_matrix.h5",
+  # "GSM5594471" = "GSM5594471_G3022_raw_feature_bc_matrix.h5",
+  # "GSM5594472" = "GSM5594472_H3023_raw_feature_bc_matrix.h5",
+  # "GSM5594473" = "GSM5594473_N3024_raw_feature_bc_matrix.h5",
+  # "GSM5594474" = "GSM5594474_B3025_raw_feature_bc_matrix.h5",
+  # "GSM5594475" = "GSM5594475_A3026_raw_feature_bc_matrix.h5",
+  # "GSM5594476" = "GSM5594476_B3027_raw_feature_bc_matrix.h5",
+  # "GSM5594477" = "GSM5594477_C3028_raw_feature_bc_matrix.h5",
+  # "GSM5594478" = "GSM5594478_A3029_raw_feature_bc_matrix.h5"
 )
 
 # === PROCESS SAMPLES ONE AT A TIME ===
