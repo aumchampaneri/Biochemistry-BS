@@ -10,8 +10,7 @@ from adjustText import adjust_text
 import os
 
 # Load the processed data
-adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Hs_Nor-CKD-AKF_scRNA_processed.h5ad")
-
+adata = sc.read_h5ad('/Users/aumchampaneri/Databases/Opiate Dependence/GSE233279_CxG-pp.h5ad')
 # Load the gene dictionary from the csv file
 gene_dict = {}
 with open('complement_gene_dictionary.csv', newline='') as file:
@@ -24,21 +23,12 @@ with open('complement_gene_dictionary.csv', newline='') as file:
 gene_dict_names = list(gene_dict.keys())
 gene_dict_keys = list(gene_dict.values())
 
-# Change the name of some entries in gene_dict_names to fix plotting errors
-gene_dict_names = [re.sub(r'\bC2\b', 'C2_ENSG00000166278', name) for name in gene_dict_names]
-gene_dict_names = [re.sub(r'\bC3\b', 'C3_ENSG00000125730', name) for name in gene_dict_names]
-gene_dict_names = [re.sub(r'\bC6\b', 'C6_ENSG00000039537', name) for name in gene_dict_names]
-gene_dict_names = [re.sub(r'\bC7\b', 'C7_ENSG00000112936', name) for name in gene_dict_names]
-gene_dict_names = [re.sub(r'\bC9\b', 'C9_ENSG00000113600', name) for name in gene_dict_names]
-
-# Load the tissue type dictionary from the yaml file
-with open("Tissue Type Dictionary.yaml", "r") as file:
-    cell_type_group = yaml.safe_load(file)
-
-# Map cell types to groups
-adata.obs['cell_type_group'] = 'Other'
-for group, cell_types in cell_type_group.items():
-    adata.obs.loc[adata.obs['cell_type'].isin(cell_types), 'cell_type_group'] = group
+# # Change the name of some entries in gene_dict_names to fix plotting errors
+# gene_dict_names = [re.sub(r'\bC2\b', 'C2_ENSG00000166278', name) for name in gene_dict_names]
+# gene_dict_names = [re.sub(r'\bC3\b', 'C3_ENSG00000125730', name) for name in gene_dict_names]
+# gene_dict_names = [re.sub(r'\bC6\b', 'C6_ENSG00000039537', name) for name in gene_dict_names]
+# gene_dict_names = [re.sub(r'\bC7\b', 'C7_ENSG00000112936', name) for name in gene_dict_names]
+# gene_dict_names = [re.sub(r'\bC9\b', 'C9_ENSG00000113600', name) for name in gene_dict_names]
 
 #%%
 
@@ -107,19 +97,19 @@ def volcano_plot(
     """
     ensembl_to_gene = {v: k for k, v in gene_dict.items()}
 
-    if "diseasetype" not in adata.obs:
-        raise ValueError("`diseasetype` column missing in adata.obs.")
+    if "disease" not in adata.obs:
+        raise ValueError("`disease` column missing in adata.obs.")
 
-    adata_subset = adata[adata.obs["diseasetype"].isin([group1, group2])].copy()
+    adata_subset = adata[adata.obs["disease"].isin([group1, group2])].copy()
 
     if adata.raw is not None:
         adata_subset = adata.raw.to_adata()
-        adata_subset = adata_subset[adata.obs["diseasetype"].isin([group1, group2])].copy()
+        adata_subset = adata_subset[adata.obs["disease"].isin([group1, group2])].copy()
 
     if np.max(adata_subset.X) > 100:
         sc.pp.log1p(adata_subset)
 
-    sc.tl.rank_genes_groups(adata_subset, groupby="diseasetype", groups=[group2], reference=group1, method=method)
+    sc.tl.rank_genes_groups(adata_subset, groupby="disease", groups=[group2], reference=group1, method=method)
 
     if "rank_genes_groups" not in adata_subset.uns:
         raise ValueError("No differential expression results found. Ensure `rank_genes_groups` was run.")
@@ -203,6 +193,6 @@ def volcano_plot(
     return fig, volcano_data
 
 # group1 is the reference group and group2 is the experimental/disease group
-disease ='AKI' # Choose the disease you want to plot (AKI, CKD, Reference)
+disease = 'opiate dependence' # Choose the disease you want to plot ('opiate dependence' or 'normal')
 
-volcano_plot(adata, gene_dict, group1="Reference", group2=f"{disease}", logfc_thresh=1.0, pval_thresh=0.1, top_n=10, method="t-test", save_path=f"{disease}_volcano.pdf")
+volcano_plot(adata, gene_dict, group1="normal", group2=f"{disease}", logfc_thresh=1.0, pval_thresh=0.1, top_n=10, method="t-test", save_path=f"{disease}_volcano.pdf")
