@@ -3,8 +3,8 @@ import subprocess
 import time
 
 # === SETTINGS ===
-input_dir = '/Users/aumchampaneri/PycharmProjects/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/raw_data'
-output_dir = '/Users/aumchampaneri/PycharmProjects/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/cleaned_data'
+input_dir = '/Complement in Disease/Mus musculus/DKD/raw_data'
+output_dir = '/Complement in Disease/Mus musculus/DKD/cleaned_data'
 os.makedirs(output_dir, exist_ok=True)
 
 # Define the sample to process

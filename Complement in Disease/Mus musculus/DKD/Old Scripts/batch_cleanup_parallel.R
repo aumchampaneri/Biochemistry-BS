@@ -8,8 +8,8 @@ library(parallel)  # For parallel processing
 # === SETTINGS ===
 # input_dir <- "/workspaces/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/raw_data"
 # output_dir <- "/workspaces/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/cleaned_data"
-input_dir <- "/Users/aumchampaneri/PycharmProjects/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/raw_data"
-output_dir <- "/Users/aumchampaneri/PycharmProjects/Biochemistry-BS/Complement in Disease/Mus musculus/DKD/cleaned_data"
+input_dir <- "/Complement in Disease/Mus musculus/DKD/raw_data"
+output_dir <- "/Complement in Disease/Mus musculus/DKD/cleaned_data"
 dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
 
 # Log file for tracking progress
