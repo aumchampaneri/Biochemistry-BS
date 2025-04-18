@@ -1,7 +1,7 @@
 import scanpy as sc
 import pandas as pd
 
-adata = sc.read_h5ad("/Users/aumchampaneri/Databases/Triple/Human_Nor-CKD-AKF_scRNA_processed.h5ad")
+adata = sc.read_h5ad('/Users/aumchampaneri/Databases/Opiate Dependence/GSE233279_CxG-pp.h5ad')
 
 # Returns a DataFrame with all Ensembl gene IDs and external gene names in the Homo sapiens genome
 biomart_query = sc.queries.biomart_annotations("hsapiens", # Query for Homo sapiens

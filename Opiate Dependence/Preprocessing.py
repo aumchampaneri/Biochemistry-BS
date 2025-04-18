@@ -1,6 +1,6 @@
 import scanpy as sc
 
-adata = sc.read_h5ad('/Users/aumchampaneri/Databases/Opiate Dependence/665dc4a2-7f38-4d78-b632-f575e3dd550e.h5ad')
+adata = sc.read_h5ad('/Users/aumchampaneri/Databases/Opiate Dependence/GSE233279_CxG.h5ad')
 
 '''
 Data is from CellxGene. Can expect it has been preprocessed.
@@ -21,4 +21,4 @@ sc.pp.normalize_total(adata, target_sum=1e4)
 sc.pp.log1p(adata)
 
 # Save the processed data
-sc.write('/Users/aumchampaneri/Databases/Opiate Dependence/GSE233279_CxG_pp.h5ad', adata)
+sc.write('/Users/aumchampaneri/Databases/Opiate Dependence/GSE233279_CxG-pp.h5ad', adata)
